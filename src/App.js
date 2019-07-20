@@ -10,12 +10,19 @@ class App extends React.Component {
   }
 
   getMemes = async (e) => {
+    // this line prevents the page from reloading (which is the default for <form> elements)
     e.preventDefault()
+    // set "loading" to true in the state so we can show a spinner
     this.setState({loading: true})
+    // here is our giphy api key
     var key = 'jhQazp87aPuMIRIZoFu2kaI2Uk5GjZRJ'
+    // this line make a URL string, I got this from their documentation
     var url = `http://api.giphy.com/v1/gifs/search?q=${this.state.text}&api_key=${key}`
+    // "fetch" calls the giphy API!
     var r = await fetch(url)
+    // this lines extracts JSON (javascript object notation)
     var json = await r.json()
+    // set the memes in state, and loading to false, and the text to blank again
     this.setState({memes: json.data, loading:false, text:''})
   }
 
