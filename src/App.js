@@ -1,7 +1,11 @@
 import React from 'react';
 import './App.css';
 
+<<<<<<< HEAD
 // blah
+=======
+// CHANGED!!!!!!
+>>>>>>> 3e53f24907bd5071ee022c31d823033510d73b93
 
 class App extends React.Component {
 
