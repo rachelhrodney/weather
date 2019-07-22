@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
-
-// CHANGED!!!!!!
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 class App extends React.Component {
 
@@ -15,7 +17,7 @@ class App extends React.Component {
     // this line prevents the page from reloading (which is the default for <form> elements)
     e.preventDefault()
     // set "loading" to true in the state so we can show a spinner
-    this.setState({loading: true})
+    this.setState({loading: true, memes:[]})
     // here is our giphy api key
     var key = 'jhQazp87aPuMIRIZoFu2kaI2Uk5GjZRJ'
     // this line make a URL string, I got this from their documentation
@@ -34,13 +36,23 @@ class App extends React.Component {
     return (
       <div className="App">
         <form className="App-header" onSubmit={this.getMemes}>
-          <input value={text}
+          <TextField value={text}
+            autoFocus
+            variant="outlined"
+            label="Search for Memes"
             onChange={e=> this.setState({text: e.target.value})}
+            style={{width:'100%',marginLeft:8}}
           />
-          <button disabled={loading || !text} type="submit">
+          <Button variant="contained"
+            color="primary"
+            disabled={loading || !text} 
+            type="submit"
+            style={{width:150, margin:'0 10px', height:75}}>
+            <SearchIcon style={{marginRight:8}} />
             Search
-          </button>
+          </Button>
         </form>
+        {loading && <LinearProgress />}
         <main>
           {memes.map(meme=>{
             // "map" loops over each meme and returns a <Meme> component
